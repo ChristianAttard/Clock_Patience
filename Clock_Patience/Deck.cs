@@ -4,9 +4,15 @@
     {
         public List<List<Card>> CreateClockPatienceDeck(string sampleInput)
         {
-            string[] rows = sampleInput.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] rows = sampleInput.Split("\n");
 
             List<List<Card>> clockPatienceDeck = new List<List<Card>>();
+
+            for (int i = 0; i < 13; i++)
+            {
+                List<Card> pile = new List<Card>();
+                clockPatienceDeck.Add(pile);
+            }
 
             foreach (var row in rows)
             {
@@ -18,13 +24,12 @@
 
                 string[] cardStrings = row.Split(' ');
 
-                List<Card> column = new List<Card>();
-                foreach (var cardString in cardStrings)
+                for (int i = 0; i < cardStrings.Length; i++)
                 {
-                    column.Add(new Card { RankSuit = cardString.Trim() });
+                    Card card = new Card();
+                    card.RankSuit = cardStrings[i];
+                    clockPatienceDeck.ElementAt(i).Add(card);
                 }
-
-                clockPatienceDeck.Add(column);
             }
 
             return clockPatienceDeck;
@@ -32,12 +37,12 @@
 
         public void DisplayClockPatienceDeck(List<List<Card>> clockPatienceDeck)
         {
-            for (int i = 0; i < clockPatienceDeck.Count; i++)
+            for (int i = 0; i < 4; i++)
+
             {
-                Console.Write($"Column {i + 1}: ");
-                foreach (var card in clockPatienceDeck[i])
+                foreach (var pile in clockPatienceDeck)
                 {
-                    Console.Write($"{card.RankSuit} ");
+                    Console.Write($"{pile.ElementAt(i).RankSuit} ");
                 }
                 Console.WriteLine();
             }

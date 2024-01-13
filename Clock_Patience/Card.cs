@@ -5,18 +5,16 @@
         //boolean variable for card facing up or down
         public string RankSuit { get; set; }        
 
-        public bool faceUp { get; set; }
-        public bool faceDown { get; set; }
+        public bool isFaceUp { get; set; }        
 
 
         //default constructor
         public Card() { }
 
         //constructor with parameters 
-        public Card(bool faceUp, bool faceDown)
+        public Card(bool faceUp)
         {
-            this.faceUp = faceUp;
-            this.faceDown = faceDown;
+            this.isFaceUp = faceUp;            
         }
     }
 }
