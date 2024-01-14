@@ -2,16 +2,16 @@
 {
     internal class Deck
     {
+        public List<List<Card>> ClockPatienceDeck = new List<List<Card>>();
+
         public List<List<Card>> CreateClockPatienceDeck(string sampleInput)
         {
             string[] rows = sampleInput.Split("\n");
 
-            List<List<Card>> clockPatienceDeck = new List<List<Card>>();
-
             for (int i = 0; i < 13; i++)
             {
                 List<Card> pile = new List<Card>();
-                clockPatienceDeck.Add(pile);
+                ClockPatienceDeck.Add(pile);
             }
 
             foreach (var row in rows)
@@ -28,58 +28,65 @@
                 {
                     Card card = new Card();
                     card.RankSuit = cardStrings[i];
-                    clockPatienceDeck.ElementAt(i).Add(card);
+                    ClockPatienceDeck.ElementAt(i).Insert(0,card);
                 }
             }
 
-            return clockPatienceDeck;
+            return ClockPatienceDeck;
         }
 
-        public void DisplayClockPatienceDeck(List<List<Card>> clockPatienceDeck)
+        public void DisplayClockPatienceDeck()
         {
             for (int i = 0; i < 4; i++)
 
             {
-                foreach (var pile in clockPatienceDeck)
+                foreach (var pile in ClockPatienceDeck)
                 {
                     Console.Write($"{pile.ElementAt(i).RankSuit} ");
                 }
                 Console.WriteLine();
             }
         }
-        
-        public void RevealCardFromTopOfPile(List<List<Card>> cardFromTopOfPile)
-        {
-            Card card = new Card();
-            Random random = new Random();
-            int randomColumnIndex = random.Next(cardFromTopOfPile.Count);
 
-            List<Card> getListOfCards = cardFromTopOfPile[randomColumnIndex];
-
-            Card topFaceDownCard = getListOfCards.FindLast(Card => !card.isFaceUp);
-
-            if (topFaceDownCard == null)
-            {
-                Console.WriteLine("No face-down cards in the chosen column.");
-                return;
-            }
-
-            // Flip the chosen card to face up
-            topFaceDownCard.Flip();
-
-            Console.WriteLine($"{randomColumnIndex} , {topFaceDownCard.ToString()}");
+        public int RevealAndPlaceOnNextPile(int indexOfPile)
+        {            
+            List<Card> pileToCheck = ClockPatienceDeck.ElementAt(indexOfPile);
+            Card cardToPlace = pileToCheck.ElementAt(pileToCheck.Count - 1);
+            pileToCheck.RemoveAt(pileToCheck.Count - 1);
+            cardToPlace.Flip();
+            int newPileIndex = GetIndexForNextPile(cardToPlace.RankSuit);
+            List<Card> pileToAdd = ClockPatienceDeck.ElementAt(newPileIndex);
+            pileToAdd.Insert(0,cardToPlace);
+            return newPileIndex;
         }
 
-        public bool HasFaceDownCards(List<List<Card>> cardPiles)
+        public int GetIndexForNextPile(string cardValue)
         {            
-            foreach (var column in cardPiles)
+            string cardRank = cardValue.Substring(0, 1);
+            
+            switch (cardRank)
+            {                
+                case "A": return 0;
+                case "T": return 9;
+                case "J": return 10;
+                case "Q": return 11;
+                case "K": return 12;                 
+            }
+            int cardRankInt = int.Parse(cardRank);
+            return cardRankInt - 1;
+        }        
+
+        public bool HasFaceDownCards(int indexOfPile)
+        {
+            List<Card> pileToCheck = ClockPatienceDeck.ElementAt(indexOfPile);
+            foreach (var item in pileToCheck)
             {
-                if (column.Exists(card => !card.isFaceUp))
+                if (!item.isFaceUp)
                 {
                     return true;
                 }
-            }
+            } 
             return false;
-        }
+        }        
     }
 }
