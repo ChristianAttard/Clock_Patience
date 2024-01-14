@@ -14,7 +14,8 @@ class Program
         int cardsRevealed = 1;
 
         deck.CreateClockPatienceDeck(sampleInput);        
-        deck.DisplayClockPatienceDeck();        
+        deck.DisplayClockPatienceDeck();   
+        //begin the game at pile index 12, the King position
         int nextPileIndex = deck.RevealAndPlaceOnNextPile(12);
         bool shouldPlayGame = true;            
 
@@ -25,7 +26,9 @@ class Program
             cardsRevealed++;
         } 
         
+        //retrieves the RankSuit of the last played card, according to the pile and card index
         string lastPlayedCard = deck.ClockPatienceDeck.ElementAt(nextPileIndex).ElementAt(0).RankSuit;
+        //converts the value of cardReavealed to a string. The padding ensures that the card revealed is at least 2 characters
         string positionStr = cardsRevealed.ToString().PadLeft(2,'0');
         Console.WriteLine(positionStr + "," + lastPlayedCard);
     }

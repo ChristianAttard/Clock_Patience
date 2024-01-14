@@ -18,11 +18,13 @@
             isFaceUp = false; //by default card is face down
         }
 
+        //a method to flip the card
         public void Flip()
         {
             isFaceUp = !isFaceUp;
         }
 
+        //a method that can be inherited to return RankSuit 
         public override string ToString()
         {
             if(isFaceUp) 
