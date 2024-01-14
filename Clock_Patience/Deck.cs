@@ -47,5 +47,39 @@
                 Console.WriteLine();
             }
         }
+        
+        public void RevealCardFromTopOfPile(List<List<Card>> cardFromTopOfPile)
+        {
+            Card card = new Card();
+            Random random = new Random();
+            int randomColumnIndex = random.Next(cardFromTopOfPile.Count);
+
+            List<Card> getListOfCards = cardFromTopOfPile[randomColumnIndex];
+
+            Card topFaceDownCard = getListOfCards.FindLast(Card => !card.isFaceUp);
+
+            if (topFaceDownCard == null)
+            {
+                Console.WriteLine("No face-down cards in the chosen column.");
+                return;
+            }
+
+            // Flip the chosen card to face up
+            topFaceDownCard.Flip();
+
+            Console.WriteLine($"{randomColumnIndex} , {topFaceDownCard.ToString()}");
+        }
+
+        public bool HasFaceDownCards(List<List<Card>> cardPiles)
+        {            
+            foreach (var column in cardPiles)
+            {
+                if (column.Exists(card => !card.isFaceUp))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
