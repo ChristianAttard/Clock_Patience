@@ -3,14 +3,14 @@
     internal class Card
     {
         //boolean variable for card facing up or down
-        public string RankSuit { get; set; }        
+        public string RankSuit { get; set; }
 
-        public bool isFaceUp { get; set; }       
+        public bool isFaceUp { get; set; }
 
 
         //default constructor
         public Card() { }
-        
+
         //constructor with parameters 
         public Card(string _RankSuit)
         {
@@ -27,14 +27,14 @@
         //a method that can be inherited to return RankSuit 
         public override string ToString()
         {
-            if(isFaceUp) 
+            if (isFaceUp)
             {
                 return $"{RankSuit}";
-            } 
+            }
             else
             {
                 return "Card is face down";
-            }            
+            }
         }
 
     }
