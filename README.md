@@ -25,4 +25,5 @@ How the programme works:
 - The first card will then move to the respective column face up, and another card will reveal from that current pile
 - The game will continuously do this, until all cards have been revealed
 - The final result would be the last card played and the turn it has been revealed
+- 
 [clock_patience.pdf](https://github.com/ChristianAttard/Clock_Patience/files/13931933/clock_patience.pdf)
