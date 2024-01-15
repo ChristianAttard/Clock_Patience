@@ -31,13 +31,13 @@
                 string[] cardStrings = row.Split(' ');
 
                 //iterate through each card in the row
-                for (int i = 0; i < cardStrings.Length; i++)
+                for (int i = 12; i >= 0; i--)
                 {
                     //create a new card with the RankSuit property to the card string
                     Card card = new Card();
                     card.RankSuit = cardStrings[i];
                     //insert the card at the top of the i pile, in this case index 0
-                    ClockPatienceDeck.ElementAt(i).Insert(0, card);
+                    ClockPatienceDeck.ElementAt(12-i).Insert(0, card);
                 }
             }
             //return the ClockPatienceDeck, which is a list of 13 piles with 4 cards each
