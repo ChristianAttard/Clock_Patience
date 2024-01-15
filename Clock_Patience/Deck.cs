@@ -48,7 +48,7 @@
         public void DisplayClockPatienceDeck()
         {
             //iterate through each 4 piles
-            for (int i = 0; i < 4; i++)
+            for (int i = 3; i >= 0; i--)
 
             {
                 //iterate through each pile in the list ClockPatienceDeck
